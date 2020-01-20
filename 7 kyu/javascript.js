@@ -61,3 +61,120 @@ const divCon = x => {
  * @param {string} x 
  */
 const last = x => x.split(' ').sort((a, b) => a.charCodeAt(a.length - 1) - b.charCodeAt(b.length - 1) > 0 ? 1 : -1);
+
+/**
+ * Breaking the Chocolate
+ * @param {number} n 
+ * @param {number} m 
+ */
+const breakChocolate = (n, m) => {
+	const multiple = n * m;
+
+	if (multiple === 1 || multiple === 0) return 0;
+
+	return multiple - 1;
+}
+
+/**
+ * Ski Jump
+ * @param {array} mountain 
+ */
+const skiJump = mountain => {
+	const height = mountain.length;
+	const speed  = height * 1.5;
+	const jump   = (height * speed * 9) / 10;
+	let str;
+
+	switch (true) {
+		case (jump < 10):
+			str = 'He\'s crap!';
+			break;
+		case (jump < 25):
+			str = 'He\'s ok!';
+			break;
+		case (jump < 50):
+			str = 'He\'s flying!';
+			break;
+		default:
+			str = 'Gold!!';
+	}
+
+	return `${jump.toFixed(2)} metres: ${str}`;
+}
+
+const tickets = peopleInLine => {
+	const price = 25;
+	const [firstBill] = peopleInLine;
+	const yesMessage = 'YES', noMessage = 'NO';
+
+	if (firstBill != price) return noMessage;
+	
+	let change = [firstBill];
+
+	for (let i = 1; i < peopleInLine.length; i++) {
+		let bill = peopleInLine[i];
+		let sum = peopleInLine[i];
+		if (bill == price) {
+			change.push(bill);
+			continue;
+		}
+		for (let j = 0; j < change.length; j++) {
+			change.sort((a,b) => a - b);
+			sum -= change[j];
+			change[j] = 0;
+			console.log(sum);
+			console.log(change);
+			if (sum != price && j == change.length - 1) {
+				return noMessage;
+			} else if (sum != price) {
+				continue;
+			} else {
+				//change = change.filter(bill => bill > 0);
+				console.log('push to change');
+				change.push(bill);
+				console.log('change: ', change);
+				break;
+			}
+		}
+				
+	}
+	return yesMessage;
+}
+
+const oddOrEven = array => {
+	const sum = array.reduce((total, item) => {
+		return total + item;
+	}, 0);
+	
+	return sum % 2 === 0 ? 'even' : 'odd';
+}
+
+const balancedNum = number => {
+	const str    = String(number);
+	const length = str.length;
+	const type   = length % 2 === 0 ? 'even' : 'odd';
+	let leftSum, rightSum;
+
+	if (length === 1 || length === 2) return 'Balanced';
+
+	if (type === 'even') {
+		const middleLeft  = Math.floor((length - 1) / 2);
+		const middleRight = Math.ceil((length - 1) / 2);
+		leftSum = [...str.slice(0, middleLeft)].reduce((total, item) => {
+			return total + +item;
+		}, 0);
+		rightSum = [...str.slice(middleRight + 1)].reduce((total, item) => {
+			return total + +item;
+		}, 0);
+	} else {
+		const middle = Math.round((length - 1) / 2);
+		leftSum = [...str.slice(0, middle)].reduce((total, item) => {
+			return total + +item;
+		}, 0);
+		rightSum = [...str.slice(middle + 1)].reduce((total, item) => {
+			return total + +item;
+		}, 0);
+	}
+
+	return leftSum === rightSum ? 'Balanced' : 'Not Balanced';
+}
