@@ -33,23 +33,25 @@ const planeSeat = a => {
 
 /**
  * List Filtering
- * @param {array} l 
+ * @param {array} l
+ * @returns {array}
  */
 const filter_list = l => l.filter(item => typeof item == 'number');
 
 /**
  * Sum of odd numbers
  * @param {number} n 
+ * @returns {number}
  */
 const rowSumOddNumbers = n => Math.pow(n, 3);
 
 /**
  * Divide and Conquer
  * @param {array} x 
+ * @returns {number}
  */
 const divCon = x => {
-	let stringSum = 0;
-	let numSum    = 0;
+	let stringSum = 0, numSum = 0;
 
 	x.forEach(item => typeof item == 'number' ? numSum += item : stringSum += +item);
 
@@ -59,6 +61,7 @@ const divCon = x => {
 /**
  * Sort by Last Char
  * @param {string} x 
+ * @returns {array}
  */
 const last = x => x.split(' ').sort((a, b) => a.charCodeAt(a.length - 1) - b.charCodeAt(b.length - 1) > 0 ? 1 : -1);
 
@@ -66,6 +69,7 @@ const last = x => x.split(' ').sort((a, b) => a.charCodeAt(a.length - 1) - b.cha
  * Breaking the Chocolate
  * @param {number} n 
  * @param {number} m 
+ * @returns {number}
  */
 const breakChocolate = (n, m) => {
 	const multiple = n * m;
@@ -78,6 +82,7 @@ const breakChocolate = (n, m) => {
 /**
  * Ski Jump
  * @param {array} mountain 
+ * @returns {string}
  */
 const skiJump = mountain => {
 	const height = mountain.length;
@@ -141,6 +146,11 @@ const tickets = peopleInLine => {
 	return yesMessage;
 }
 
+/**
+ * Odd or Even
+ * @param {array} array
+ * @returns {string}
+ */
 const oddOrEven = array => {
 	const sum = array.reduce((total, item) => {
 		return total + item;
@@ -149,6 +159,10 @@ const oddOrEven = array => {
 	return sum % 2 === 0 ? 'even' : 'odd';
 }
 
+/**
+ * Balanced Number (Special Numbers Series #1 ) 
+ * @param {number} number 
+ */
 const balancedNum = number => {
 	const str    = String(number);
 	const length = str.length;
@@ -177,4 +191,42 @@ const balancedNum = number => {
 	}
 
 	return leftSum === rightSum ? 'Balanced' : 'Not Balanced';
+}
+
+/**
+ * Count the divisors of a number
+ * @param {number} n 
+ * @returns {number}
+ */
+const getDivisorsCnt = n => {
+	let divisors = [];
+
+	for (let i = 1; i <= n; i++) {
+		if (n % i === 0) {
+			divisors.push(i);
+		}
+	}
+	
+	return divisors.length;
+}
+
+/**
+ * Most sales
+ * @param {array} products 
+ * @param {array} amounts 
+ * @param {array} prices
+ * @returns {array}
+ */
+const top3 = (products, amounts, prices) => {
+	let revenues = [], top3Revenues = [];
+
+	for (let i = 0; i < products.length; i++) {
+		revenues.push({
+			[products[i]]: amounts[i] * prices[i]
+		});
+	}
+	revenues.sort((a, b) => b[Object.keys(b)] - a[Object.keys(a)]);
+	top3Revenues = revenues.slice(0,3).map(item => Object.keys(item)[0]);
+	console.log(top3Revenues);
+	return top3Revenues;
 }
