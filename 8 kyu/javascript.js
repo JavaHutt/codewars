@@ -10,7 +10,7 @@ const noSpace = x => x.replace(/ /g, '');
  * @param {array} x
  * @returns {array} 
  */
-const maps = x => x.map(item => item *2);
+const maps = x => x.map(item => item * 2);
 
 const phrases = [
     'not at all',
@@ -74,6 +74,7 @@ const monkeyCount = n =>  [...Array(n)].map((item, i) => i + 1);
 /**
  * Convert a String to a Number!
  * @param {string} str 
+ * @returns {number}
  */
 const stringToNumber = str => +str;
 
@@ -81,5 +82,6 @@ const stringToNumber = str => +str;
  * Multiply
  * @param {number} a 
  * @param {number} b 
+ * @returns {number}
  */
 const multiply = (a, b) => a * b;
